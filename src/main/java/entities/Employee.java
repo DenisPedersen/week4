@@ -21,6 +21,10 @@ public class Employee {
     public Employee(String name, String address, Integer salary) {
     }
 
+    public Employee() {
+
+    }
+
     public Integer getId() {
         return id;
     }

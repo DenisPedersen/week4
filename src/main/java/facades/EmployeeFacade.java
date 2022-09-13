@@ -1,5 +1,6 @@
 package facades;
 
+import dtos.EmployeeDTO;
 import entities.Employee;
 
 import javax.persistence.EntityManager;
@@ -10,6 +11,18 @@ import java.util.List;
 public class EmployeeFacade {
     private static EmployeeFacade instance;
     private static EntityManagerFactory emf;
+
+    public static EmployeeFacade getEmployeeFacade(EntityManagerFactory _emf){
+        if (instance == null) {
+            emf = _emf;
+            instance = new EmployeeFacade();
+        }
+        return instance;
+    }
+
+    private EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
 
     public Employee getEmployeeById(int id) {
         EntityManager em = emf.createEntityManager();
@@ -44,4 +57,16 @@ public class EmployeeFacade {
         return newEmployee;
     }
 
+    public EmployeeDTO getById(Integer id) {
+        EntityManager em = emf.createEntityManager();
+        Employee employee = em.find(Employee.class, id);
+        return new EmployeeDTO(employee);
+    }
+
+    public List<EmployeeDTO> getAll() {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e", Employee.class);
+        List<Employee> employeeList = query.getResultList();
+        return EmployeeDTO.getDtos(employeeList);
+    }
 }
