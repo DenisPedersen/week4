@@ -69,4 +69,11 @@ public class EmployeeFacade {
         List<Employee> employeeList = query.getResultList();
         return EmployeeDTO.getDtos(employeeList);
     }
+
+    public EmployeeDTO getEmployeeWithHighestSalary(){
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e ORDER BY e.salary DESC", Employee.class);
+        return  new EmployeeDTO(query.setMaxResults(1).getSingleResult());
+
+    }
 }

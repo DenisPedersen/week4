@@ -41,14 +41,25 @@ public class PersonResource {
     public Response getAllPersons() {
         return Response.ok().entity(GSON.toJson(FACADE.getAll())).build();
     }
-   /*
+
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response postExample(String input){
-        PersonDTO personDTO = GSON.fromJson(input, PersonDTO.class);
-        System.out.println(personDTO);
-        return Response.ok().entity(personDTO).build();
+    public Response createPerson(String jsonInput){
+        PersonDTO personDTO = GSON.fromJson(jsonInput, PersonDTO.class);
+        PersonDTO created = FACADE.create(personDTO);
+        //System.out.println(personDTO);
+        return Response.ok().entity(created).build();
     }
-    */
+
+    @PUT
+    @Path("/update/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response update(@PathParam("id") int id, String input) {
+        PersonDTO newPerson = GSON.fromJson(input,PersonDTO.class);
+        newPerson.setId(id);
+        PersonDTO returned = FACADE.update(newPerson);
+        return Response.ok().entity(returned).build();
+    }
 }

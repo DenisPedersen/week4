@@ -7,6 +7,7 @@ import entities.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 
 //import errorhandling.PersonNotFoundException;
@@ -75,5 +76,20 @@ public class PersonFacade {
         PersonFacade personFacade = getPersonFacade(emf);
         personFacade.getAll().forEach(dto->System.out.println(dto));
     }
-
+    public PersonDTO update(PersonDTO personDTO){
+        EntityManager em = getEntityManager();
+        Person fromDB = em.find(Person.class, personDTO.getId());
+        if(fromDB == null) {
+            throw new EntityNotFoundException("The person with id " + personDTO.getId() + " could not be found");
+        }
+        Person personEntity = new Person(personDTO.getId(), personDTO.getName(), personDTO.getAge());
+        try {
+            em.getTransaction().begin();
+            em.merge(personEntity);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new PersonDTO(personEntity);
+    }
 }
