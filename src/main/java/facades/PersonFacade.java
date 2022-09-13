@@ -11,6 +11,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 
 //import errorhandling.PersonNotFoundException;
+import errorhandling.PersonNotFoundException;
 import utils.EMF_Creator;
 
 /**
@@ -55,11 +56,11 @@ public class PersonFacade {
         }
         return new PersonDTO(personEntity);
     }
-    public PersonDTO getById(long id) { //throws PersonNotFoundException {
+    public PersonDTO getById(long id) throws PersonNotFoundException { //throws PersonNotFoundException {
         EntityManager em = emf.createEntityManager();
         Person person = em.find(Person.class, id);
-//        if (rm == null)
-//            throw new PersonNotFoundException("The Person entity with ID: "+id+" Was not found");
+       if (person == null)
+            throw new PersonNotFoundException("The Person entity with ID: "+id+" Was not found");
         return new PersonDTO(person);
     }
 

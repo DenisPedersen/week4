@@ -7,6 +7,9 @@ package dtos;
 
 import entities.Person;
 import entities.RenameMe;
+
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +21,7 @@ public class PersonDTO {
     private long id;
     private String name;
     private int age;
+
 
     public PersonDTO(String name, int age) {
         this.name = name;

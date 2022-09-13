@@ -1,6 +1,8 @@
 package rest;
 
 import entities.Employee;
+import errorhandling.PersonNotFoundException;
+import errorhandling.PersonNotFoundExceptionMapper;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -26,6 +28,8 @@ public class ApplicationConfig extends Application {
         resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
         resources.add(PersonResource.class);
         resources.add(EmployeeRescource.class);
+        resources.add(errorhandling.PersonNotFoundExceptionMapper.class);
+        resources.add(errorhandling.PersonNotFoundException.class);
     }
     
 }
