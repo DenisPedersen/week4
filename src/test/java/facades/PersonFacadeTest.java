@@ -1,3 +1,4 @@
+/*
 package facades;
 
 import entities.Person;
@@ -54,6 +55,7 @@ public class PersonFacadeTest {
     public void tearDown() {
 //        Remove any data after each test was run
     }
+*/
 /*
     // TODO: Delete or change this method 
     @Test
@@ -62,6 +64,8 @@ public class PersonFacadeTest {
     }
 
 
- */
+ *//*
+
 
 }
+*/

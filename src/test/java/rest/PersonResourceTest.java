@@ -1,3 +1,4 @@
+/*
 package rest;
 
 import entities.RenameMe;
@@ -104,3 +105,4 @@ public class PersonResourceTest {
                 .body("count", equalTo(2));
     }
 }
+*/
