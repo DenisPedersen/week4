@@ -49,7 +49,7 @@ public class PersonResource {
     public Response getAllPersons() {
         return Response.ok().entity(GSON.toJson(FACADE.getAll())).build();
     }
-
+//
 
 
     @POST
